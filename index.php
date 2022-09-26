@@ -1,7 +1,7 @@
 <?php
 
  //require '/Controleur/errorHandling.php';
- require '/Controleur/controleur.php';
+ require 'Controleur/controleur.php';
 
  try{
       $connexion=createConnexion();
@@ -14,5 +14,7 @@
    {
       $msgErreur = $e->getMessage();
       ajouterErreur($msgErreur);
-      require '/Vue/vueErreur.php';
+      require 'Vue/vueErreur.php';
    }
+
+?>

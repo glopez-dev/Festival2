@@ -1,36 +1,14 @@
 <?php
 
-    require '../Modele/modele.php';
+    require 'Modele/modele.php';
 
-    function displayVue () {
-        if (isset($_GET['action'])){
-            switch ($_GET['action']){
-                case 'attributions' : 
-                    attributions();
-                    break;
-                case 'consultationAttributions' :
-                    consultationAttributions();
-                    break;
-                case 'creationEtablissement';
-                    creationEtablissement();
-                    break;
-                case 'detailEtablissement';
-                    break;
-                default : 
-                    throw new Exception("Action non reconnue par le contôleur");
-                    break;
-            }
-        } 
-        else { 
-            accueil(); 
-        }
-    }
+    // ON DEFINIT D'ABORD TOUTES LES FOCNTIONS GÉNÉRANT DES PAGES :
 
     function accueil() {
-        require '../Vue/vueAccueil.php';
+        require 'Vue/vueAccueil.php';
     }
     
-    function consultationAttribution() {
+    function consultationAttributions() {
         $nbEtab=obtenirNbEtabOffrantChambres($connexion);
         if ($nbEtab!=0) 
             {  
@@ -103,7 +81,33 @@
                 $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
                 } // Fin de la boucle sur les établissements
             }
-        require '../Vue/vueAttributions.php';
+        require '/Vue/vueAttributions.php';
+    }
+
+    // PUIS ON DEFINIT LE CONTROLEUR FRONTAL
+
+    function displayVue () {
+        if (isset($_GET['action'])){
+            switch ($_GET['action']){
+                case 'attributions' : 
+                    attributions();
+                    break;
+                case 'consultationAttributions' :
+                    consultationAttributions();
+                    break;
+                case 'creationEtablissement';
+                    creationEtablissement();
+                    break;
+                case 'detailEtablissement';
+                    break;
+                default : 
+                    throw new Exception("Action non reconnue par le contôleur");
+                    break;
+            }
+        } 
+        else { 
+            accueil(); 
+        }
     }
 
     

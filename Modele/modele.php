@@ -5,8 +5,8 @@
 function createConnexion()
 {
    $host="localhost";
-   $user="root";
-   $mdp="";
+   $user="pdoFestival";
+   $mdp="123456";
    
    $dsn = 'mysql:host=localhost;dbname=festival'; 
    $dbh= new PDO($dsn, $user, $mdp); 
@@ -32,7 +32,7 @@ function tryConnexion() {
 }
 
 // inutile ???
-function tryQuery($connexion, $base)
+function tryQuery($connexion)
 {
    //$bd="festival"; INUTILE ?
    $query="SET CHARACTER SET utf8";
