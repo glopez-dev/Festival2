@@ -3,13 +3,22 @@
     require '../Modele/modele.php';
 
     function displayVue () {
-        if (isset($_GET['action']))
-            {
-            if ($_GET['action'] === "attributions") { 
-                attributions();
+        if (isset($_GET['action'])){
+            switch ($_GET['action']){
+                case 'attributions' : 
+                    attributions();
+                    break;
+                case 'consultationAttributions' :
+                    consultationAttributions();
+                    break;
+                default : 
+                    throw new Exception("Action non reconnue par le contôleur");
+                    break;
             }
-            else { throw new Exception("Action non reconnue par le contôleur"); } 
-            } else { accueil(); }
+        } 
+        else { 
+            accueil(); 
+        }
     }
 
     function accueil() {
