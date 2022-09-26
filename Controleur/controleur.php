@@ -11,6 +11,11 @@
                 case 'consultationAttributions' :
                     consultationAttributions();
                     break;
+                case 'creationEtablissement';
+                    creationEtablissement();
+                    break;
+                case 'detailEtablissement';
+                    break;
                 default : 
                     throw new Exception("Action non reconnue par le contôleur");
                     break;
