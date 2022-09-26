@@ -4,11 +4,8 @@
  require 'Controleur/controleur.php';
 
  try{
-      $connexion=createConnexion();
-      tryConnexion();
-
-      displayVue();
-
+      tryConnexion(); // teste la connexion a la BDD
+      displayVue(); // controleur frontal permettant d'afficher de vues
    }
    catch (Exceptions $e) // ex gestion d'erreurs de "_controlesEtGestionErreurs.inc.php" (implémentation a finaliser)
    {

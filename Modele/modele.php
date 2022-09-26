@@ -153,8 +153,9 @@ function obtenirNbEtab($connexion)
    return $lgEtab["nombreEtab"];
 }
 
-function obtenirNbEtabOffrantChambres($connexion)
+function obtenirNbEtabOffrantChambres()
 {
+   $connexion=createConnexion();
    $req="select count(*) as nombreEtabOffrantChambres from Etablissement where 
          nombreChambresOffertes!=0";
    $rsEtabOffrantChambres=$connexion->query($req);

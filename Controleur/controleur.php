@@ -9,6 +9,7 @@
     }
     
     function consultationAttributions() {
+        $connexion=createConnexion();
         $nbEtab=obtenirNbEtabOffrantChambres($connexion);
         if ($nbEtab!=0) 
             {  

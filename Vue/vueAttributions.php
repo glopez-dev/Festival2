@@ -2,7 +2,6 @@
 
 
 <?php ob_start() ?>
+<?php require 'pageTemplate.php'; ?>
 <p><?php consultationAttribution() ?></p>
 <?php $contenu = ob_get_clean(); ?>
-
-<?php require 'pageTemplate.php'; ?>
