@@ -4,23 +4,6 @@ include("_debut.inc.php");
 include("_gestionBase.inc.php"); 
 include("_controlesEtGestionErreurs.inc.php");
 
-// Teste la connexion au serveur et a la BDD et retourne des exceptions en cas d'échec
-function testConnexion(){
-   $connexion=connect();
-   if (!$connexion)
-   {
-      ajouterErreur("Echec de la connexion au serveur MySql");
-      afficherErreurs();
-      exit();
-   }
-   if (!selectBase($connexion))
-   {
-      ajouterErreur("La base de données festival est inexistante ou non accessible");
-      afficherErreurs();
-      exit();
-   }
-}
-
 
 // CONSULTER LES ATTRIBUTIONS DE TOUS LES ÉTABLISSEMENTS
 

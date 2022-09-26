@@ -2,7 +2,7 @@
 
 // FONCTIONS DE CONNEXION
 
-function connect()
+function createConnexion()
 {
    $host="localhost";
    $user="root";
@@ -14,10 +14,27 @@ function connect()
    return $dbh;
 }
 
+function tryConnexion() {
+   $connexion = createConnexion();
+   if (!$connexion) {
+       //ajouterErreur("Echec de la connexion au serveur MySql");
+       throw new Exception("Echec de la connexion au serveur MySql");
+       afficherErreurs();
+       exit();
+    }
+    if (!tryQuery($connexion))
+    {
+       //ajouterErreur("La base de données festival est inexistante ou non accessible");
+       throw new Exception("La base de données festival est inexistante ou non accessible");
+       afficherErreurs();
+       exit();
+    }
+}
+
 // inutile ???
-function selectBase($connexion, $base)
+function tryQuery($connexion, $base)
 {
-   $bd="festival";
+   //$bd="festival"; INUTILE ?
    $query="SET CHARACTER SET utf8";
    // Modification du jeu de caractères de la connexion
      
