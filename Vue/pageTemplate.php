@@ -22,10 +22,10 @@
 <!--  Tableau contenant les menus -->
 <table width="80%" cellpadding="0" cellspacing="0" class="tabMenu" align="center">
    <tr>
-      <td class="menu"><a href="index.php">Accueil</a></td>
-      <td class="menu"><a href="listeEtablissements.php">
+      <td class="menu"><a href="index.php"  = >Accueil</a></td>
+      <td class="menu"><a href="index.php?action=listeEtablissements">
       Gestion établissements</a></td>
-      <td class="menu"><a href="consultationAttributions.php">
+      <td class="menu"><a href="index.php?action=consultationAttributions">
       Attributions chambres</a></td>
    </tr>
 </table>

@@ -29,3 +29,5 @@
         $nbEtab=obtenirNbEtabOffrantChambres($connexion);
         require '../Vue/vueAttributions.php';
     }
+
+    
