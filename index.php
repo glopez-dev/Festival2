@@ -9,18 +9,6 @@
 
       displayVue();
 
-      if (isset($_GET['action'])){
-         if ($_GET['action'] === "attributions") {
-            attributions();
-         }
-         else{
-            throw new Exception("Action non reconnue par le contôleur");
-         } 
-      }
-      else {
-         accueil();
-      }
-   
    }
    catch (Exceptions $e) // ex gestion d'erreurs de "_controlesEtGestionErreurs.inc.php" (implémentation a finaliser)
    {
