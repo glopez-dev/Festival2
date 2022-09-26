@@ -9,9 +9,9 @@ include("_controlesEtGestionErreurs.inc.php");
 
 // IL FAUT QU'IL Y AIT AU MOINS UN ÉTABLISSEMENT OFFRANT DES CHAMBRES POUR  
 // AFFICHER LE LIEN VERS LA MODIFICATION
-$nbEtab=obtenirNbEtabOffrantChambres($connexion);
+// ($nbEtab=obtenirNbEtabOffrantChambres($connexion);) déjà mis dans le contrôleur
 if ($nbEtab!=0)
-{
+{  
    echo "
    <table width='75%' cellspacing='0' cellpadding='0' align='center'
    <tr><td>
