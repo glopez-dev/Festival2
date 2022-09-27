@@ -1,10 +1,10 @@
+<?php 
+    $title = 'Festival - Detail Etablissement'; 
+?> 
+<?php ob_start() ?>
 <?php
 
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
-
+$connexion = createConnexion();
 $id=$_REQUEST['id'];  
 
 // OBTENIR LE DÉTAIL DE L'ÉTABLISSEMENT SÉLECTIONNÉ
@@ -78,8 +78,11 @@ class='tabNonQuadrille'>
 </table>
 <table align='center'>
    <tr>
-      <td align='center'><a href='listeEtablissements.php'>Retour</a>
+      <td align='center'><a href='index.php?action=listeEtablissements'>Retour</a>
       </td>
    </tr>
 </table>";
 ?>
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>

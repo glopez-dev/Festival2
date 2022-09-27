@@ -1,24 +1,15 @@
+<?php 
+    $title = 'Festival -  Liste Etablissements'; 
+?> 
+<?php ob_start() ?>
 <?php
-
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
-// CONNEXION AU SERVEUR MYSQL PUIS SÉLECTION DE LA BASE DE DONNÉES festival
-
-
-
-// AFFICHER L'ENSEMBLE DES ÉTABLISSEMENTS
-// CETTE PAGE CONTIENT UN TABLEAU CONSTITUÉ D'1 LIGNE D'EN-TÊTE ET D'1 LIGNE PAR
-// ÉTABLISSEMENT
-
 echo "
 <table width='70%' cellspacing='0' cellpadding='0' align='center' 
 class='tabNonQuadrille'>
    <tr class='enTeteTabNonQuad'>
       <td colspan='4'>Etablissements</td>
    </tr>";
-     
+   $connexion = createConnexion();
    $req=obtenirReqEtablissements();
    $rsEtab=$connexion->query($req);
    $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
@@ -31,10 +22,10 @@ class='tabNonQuadrille'>
 		<tr class='ligneTabNonQuad'>
          <td width='52%'>$nom</td>
          
-         <td width='16%' align='center'><a href='detailEtablissement.php?id=$id'>Voir détail</a></td>
+         <td width='16%' align='center'><a href='index.php?action=detailEtablissement&id=$id'>Voir détail</a></td>
          
          <td width='16%' align='center'> 
-         <a href='modificationEtablissement.php?action=demanderModifEtab&amp;id=$id'>
+         <a href='index.php?action=modificationAttributions&amp;id=$id'>
          Modifier</a></td>";
       	
          // S'il existe déjà des attributions pour l'établissement, il faudra
@@ -57,9 +48,11 @@ class='tabNonQuadrille'>
    }   
    echo "
    <tr class='ligneTabNonQuad'>
-      <td colspan='4'><a href='creationEtablissement.php?action=demanderCreEtab'>
+      <td colspan='4'><a href='index.php?action=creationEtablissement'>
       Création d'un établissement</a ></td>
   </tr>
 </table>";
-
 ?>
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>

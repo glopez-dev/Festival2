@@ -1,9 +1,8 @@
+<?php 
+    $title = 'Festival - Creation Etablissement'; 
+?> 
+<?php ob_start() ?>
 <?php
-
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
 // CRÉER UN ÉTABLISSEMENT 
 
 // Déclaration du tableau des civilités
@@ -55,7 +54,7 @@ else
 }
 
 echo "
-<form method='POST' action='creationEtablissement.php?'>
+<form method='POST' action='modificationEtablissement.php?'>
    <input type='hidden' value='validerCreEtab' name='action'>
    <table width='85%' align='center' cellspacing='0' cellpadding='0' 
    class='tabNonQuadrille'>
@@ -160,7 +159,7 @@ echo "
          </td>
       </tr>
       <tr>
-         <td colspan='2' align='center'><a href='listeEtablissements.php'>Retour</a>
+         <td colspan='2' align='center'><a href='index.php?action=listeEtablissements'>Retour</a>
          </td>
       </tr>
    </table>
@@ -182,3 +181,6 @@ if ($action=='validerCreEtab')
 }
 
 ?>
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>

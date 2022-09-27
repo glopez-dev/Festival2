@@ -1,9 +1,10 @@
+<?php 
+    $title = 'Festival -  Modifier Attributions'; 
+?> 
+<?php ob_start() ?>
 <?php
-
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
+// Connexion à la base 'festival'
+$connexion = createConnexion();
 // EFFECTUER OU MODIFIER LES ATTRIBUTIONS POUR L'ENSEMBLE DES ÉTABLISSEMENTS
 
 // CETTE PAGE CONTIENT UN TABLEAU CONSTITUÉ DE 2 LIGNES D'EN-TÊTE (LIGNE TITRE ET 
@@ -143,7 +144,7 @@ echo "
 echo "
 <table align='center' width='80%'>
    <tr>
-      <td width='34%' align='left'><a href='consultationAttributions.php'>Retour</a>
+      <td width='34%' align='left'><a href='index.php?action=consultationAttributions'>Retour</a>
       </td>
       <td class='reserveSiLien'>&nbsp;</td>
       <td width='30%' align='left'>Réservation possible si lien</td>
@@ -153,3 +154,7 @@ echo "
 </table>";
 
 ?>
+
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>
