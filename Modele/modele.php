@@ -14,8 +14,7 @@ function createConnexion()
    return $dbh;
 }
 
-function tryConnexion() {
-   $connexion = createConnexion();
+function tryConnexion($connexion) {
    if (!$connexion) {
        //ajouterErreur("Echec de la connexion au serveur MySql");
        throw new Exception("Echec de la connexion au serveur MySql");
@@ -153,9 +152,8 @@ function obtenirNbEtab($connexion)
    return $lgEtab["nombreEtab"];
 }
 
-function obtenirNbEtabOffrantChambres()
+function obtenirNbEtabOffrantChambres($connexion)
 {
-   $connexion=createConnexion();
    $req="select count(*) as nombreEtabOffrantChambres from Etablissement where 
          nombreChambresOffertes!=0";
    $rsEtabOffrantChambres=$connexion->query($req);

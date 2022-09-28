@@ -18,12 +18,12 @@ $nb=$nbEtabOffrantChambres+1;
 // Détermination du pourcentage de largeur des colonnes "établissements"
 $pourcCol=50/$nbEtabOffrantChambres;
 
-$action=$_REQUEST['action'];
+$modif=$_REQUEST['modif'];
 
 // Si l'action est validerModifAttrib (cas où l'on vient de la page 
 // donnerNbChambres.php) alors on effectue la mise à jour des attributions dans 
 // la base 
-if ($action=='validerModifAttrib')
+if ($modif=='validerModifAttrib')
 {
    $idEtab=$_REQUEST['idEtab'];
    $idGroupe=$_REQUEST['idGroupe'];
@@ -113,7 +113,7 @@ class='tabQuadrille'>";
             $nbMax = $nbChLib + $nbOccupGroupe;
             echo "
             <td class='reserve'>
-            <a href='donnerNbChambres.php?idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbMax'>
+            <a href='index.php?action=donnerNbChambres&amp;idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbMax'>
             $nbOccupGroupe</a></td>";
          }
          else
@@ -125,7 +125,7 @@ class='tabQuadrille'>";
             {
                echo "
                <td class='reserveSiLien'>
-               <a href='donnerNbChambres.php?idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbChLib'>
+               <a href='index.php?action=donnerNbChambres&amp;idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbChLib'>
                __</a></td>";
             }
             else

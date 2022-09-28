@@ -8,52 +8,69 @@
         require 'Vue/vueAccueil.php';
     }
 
-    function listeEtablissements() {
+    function listeEtablissements($connexion) {
         require 'Vue/vueListeEtablissements.php';
     }
 
-    function creationEtablissement() {
+    function creationEtablissement($connexion) {
+        $modif=$_REQUEST['modif'];
         require 'Vue/vueCreationEtablissement.php';
     }
 
-    function modificationAttributions() {
+    function modificationEtablissements($connexion) {
+        $modif=$_REQUEST['modif'];
+        require 'Vue/vueModificationEtablissements.php';
+    }
+
+    function modificationAttributions($connexion) {
         require 'Vue/vueModificationAttributions.php';
     }
 
-    function supressionEtablissement() {
-        
+    function supressionEtablissement($connexion) {
+        require 'Vue/vueSupressionEtablissements.php';
     }
 
-    function detailEtablissement() {
+    function detailEtablissement($connexion) {
         require 'Vue/vueDetailEtablissement.php';
     }
     
-    function consultationAttributions() {
+    function consultationAttributions($connexion) {
         require 'Vue/vueAttributions.php';
+    }
+
+    function donnerNbChambres($connexion) {
+        require 'Vue/vueNbChambres.php';
     }
 
     // PUIS ON DEFINIT LE CONTROLEUR FRONTAL
 
-    function displayVue () {
+    function displayVue ($connexion) {
+    
         if (isset($_GET['action'])){
             switch ($_GET['action']){
                 case 'listeEtablissements' :
-                    listeEtablissements();
+                    listeEtablissements($connexion);
                     break;
                 case 'consultationAttributions' :
-                    consultationAttributions();
+                    consultationAttributions($connexion);
                     break;
                 case 'creationEtablissement' :
-                    creationEtablissement();
+                    creationEtablissement($connexion);
                     break;
-                case 'modificationAttributions' :
-                    modificationAttributions();
+                case 'modificationEtablissements' :
+                    modificationEtablissements($connexion);
+                    break;
+                case 'supressionEtablissements' :
+                    supressionEtablissement($connexion);
                     break;
                 case 'detailEtablissement':
-                    detailEtablissement();
+                    detailEtablissement($connexion);
                     break;
-                case 'demanderModifAttrib':
-                    modificationAttributions();
+                case 'modificationAttributions' :
+                    modificationAttributions($connexion);
+                    break;
+                case 'donnerNbChambres' : 
+                    donnerNbChambres($connexion);
                     break;
                 default : 
                     throw new Exception("Action non reconnue par le contôleur");

@@ -1,19 +1,15 @@
 <?php 
-
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
-// SUPPRIMER UN ÉTABLISSEMENT 
-
+    $title = 'Festival -  Supprimer Etablissement'; 
+?> 
+<?php ob_start() ?>
+<?php
 $id=$_REQUEST['id'];  
-
 $lgEtab=obtenirDetailEtablissement($connexion, $id);
 $nom=$lgEtab['nom'];
 
 // Cas 1ère étape (on vient de listeEtablissements.php)
 
-if ($_REQUEST['action']=='demanderSupprEtab')    
+if ($_REQUEST['modif']=='demanderSupprEtab')    
 {
    echo "
    <br><center><h5>Souhaitez-vous vraiment supprimer l'établissement $nom ? 
@@ -32,5 +28,7 @@ else
    <br><br><center><h5>L'établissement $nom a été supprimé</h5>
    <a href='listeEtablissements.php?'>Retour</a></center>";
 }
-
 ?>
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>
