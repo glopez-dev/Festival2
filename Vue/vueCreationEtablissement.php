@@ -42,7 +42,8 @@ else
    $nombreChambresOffertes=$_REQUEST['nombreChambresOffertes'];
 
    verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, 
-                        $tel, $nomResponsable, $nombreChambresOffertes);      
+                        $tel, $nomResponsable, $nombreChambresOffertes); 
+   echo nbErreurs();    
    if (nbErreurs()==0)
    {        
       creerEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, $ville,  
@@ -52,7 +53,7 @@ else
 }
 
 echo "
-<form method='POST' action='index.php?action=modificationEtablissements&amp;modif=validerCreEtab'>
+<form method='POST' action='index.php?action=creationEtablissement&amp;modif=validerCreEtab'>
    <input type='hidden' value='validerCreEtab' name='modif'>
    <table width='85%' align='center' cellspacing='0' cellpadding='0' 
    class='tabNonQuadrille'>
@@ -167,15 +168,15 @@ echo "
 // confirmation
 if ($modif=='validerCreEtab')
 {
-   /*if (nbErreurs()!=0)
+   if (nbErreurs()!=0)
    {
       afficherErreurs();
    }
    else
-   {*/
+   {
       echo "
       <h5><center>La création de l'établissement a été effectuée</center></h5>";
-   //}
+   }
 }
 
 ?>

@@ -16,17 +16,15 @@ function createConnexion()
 
 function tryConnexion($connexion) {
    if (!$connexion) {
-       //ajouterErreur("Echec de la connexion au serveur MySql");
-       throw new Exception("Echec de la connexion au serveur MySql");
-       afficherErreurs();
-       exit();
+       ajouterErreur("Echec de la connexion au serveur MySql");
+       //afficherErreurs();
+       //exit();
     }
     if (!tryQuery($connexion))
     {
-       //ajouterErreur("La base de données festival est inexistante ou non accessible");
-       throw new Exception("La base de données festival est inexistante ou non accessible");
-       afficherErreurs();
-       exit();
+       ajouterErreur("La base de données festival est inexistante ou non accessible");
+       //afficherErreurs();
+       //exit();
     }
 }
 
@@ -340,22 +338,26 @@ function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal,
 
 // FONCTIONS DE GESTION DES ERREURS
 
-function ajouterErreur($msg)
+// stocke l'exception $e attrapée par le catch dans un array
+function ajouterErreur($message) 
 {
-   if (! isset($_REQUEST['erreurs']))
-      $_REQUEST['erreurs']=array();
-   $_REQUEST['erreurs'][]=$msg;
+   $e = new Exception($message);
+   if (!isset($ERROR)) 
+   {
+      $ERROR['erreurs']=array();
+   }  
+   $ERROR['erreurs'][]=$e;
 }
 
 function nbErreurs()
 {
-   if (!isset($_REQUEST['erreurs']))
+   if (!isset($ERROR['erreurs']))
    {
 	   return 0;
 	}
 	else
 	{
-	   return count($_REQUEST['erreurs']);
+	   return count($ERROR['erreurs']);
 	}
 }
  
@@ -363,9 +365,9 @@ function afficherErreurs()
 {
    echo '<div class="msgErreur">';
    echo '<ul>';
-   foreach($_REQUEST['erreurs'] as $erreur)
+   foreach($ERROR['erreurs'] as $erreur)
 	{
-      echo "<li>$erreur</li>";
+      echo "<li>$erreur->getMessage()</li>";
 	}
    echo '</ul>';
    echo '</div>';

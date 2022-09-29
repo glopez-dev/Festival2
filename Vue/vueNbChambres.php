@@ -11,7 +11,7 @@ $idGroupe=$_REQUEST['idGroupe'];
 $nbChambres=$_REQUEST['nbChambres'];
 
 echo "
-<form method='POST' action='modificationAttributions.php'>
+<form method='POST' action='index.php?action=modificationAttributions'>
 	<input type='hidden' value='validerModifAttrib' name='modif'>
    <input type='hidden' value='$idEtab' name='idEtab'>
    <input type='hidden' value='$idGroupe' name='idGroupe'>";

@@ -34,7 +34,7 @@ class='tabNonQuadrille'>
 			{
             echo "
             <td width='16%' align='center'> 
-            <a href='index.php?action=supressionEtablissements&id=$id'>
+            <a href='index.php?action=supressionEtablissements&amp;id=$id&amp;modif=demanderSupprEtab'>
             Supprimer</a></td>";
          }
          else
