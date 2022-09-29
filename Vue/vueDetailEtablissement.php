@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Festival - Detail Etablissement'; 
+    $title = 'Accueil > Etablissements > Detail Etablissement'; 
 ?> 
 <?php ob_start() ?>
 <?php

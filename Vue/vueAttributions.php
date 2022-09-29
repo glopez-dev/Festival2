@@ -1,4 +1,4 @@
-<?php $title = 'Festival - Attribution'; ?>
+<?php $title = 'Accueil > Attributions chambres'; ?>
 
 <?php ob_start() ?>
 <?php
@@ -33,7 +33,7 @@
                   // AFFICHAGE DE LA 1ÈRE LIGNE D'EN-TÊTE 
                   echo "
                   <tr class='enTeteTabQuad'>
-                  <td colspan='2' align='left'><strong>$nomEtab</strong>&nbsp;
+                  <td colspan='3' align='left'><strong>$nomEtab</strong>&nbsp;
                   (Offre : $nbOffre&nbsp;&nbsp;Disponibilités : $nbChLib)
                   </td>
                   </tr>";
@@ -41,9 +41,9 @@
                  // AFFICHAGE DE LA 2ÈME LIGNE D'EN-TÊTE 
                 echo "
                 <tr class='ligneTabQuad'>
-                   <td width='65%' align='left'><i><strong>Nom groupe</strong></i></td>
-                     <td width='35%' align='left'><i><strong>Chambres attribuées</strong></i>
-                     </td>
+                  <td width='50%' align='left'><i><strong>Nom groupe</strong></i></td>
+                  <td width='25%' align='left'><i><strong>Chambres attribuées</strong></i></td>
+                  <td width='25%' align='left'><i><strong>Pays d'origine</strong></i></td>
                 </tr>";
         
                 // AFFICHAGE DU DÉTAIL DES ATTRIBUTIONS : UNE LIGNE PAR GROUPE AFFECTÉ 
@@ -55,17 +55,19 @@
                  // BOUCLE SUR LES GROUPES (CHAQUE GROUPE EST AFFICHÉ EN LIGNE)
                 while($lgGroupe!=FALSE)
                 {
-                   $idGroupe=$lgGroupe['id'];
-              $nomGroupe=$lgGroupe['nom'];
+                  $idGroupe=$lgGroupe['id'];
+                  $nomGroupe=$lgGroupe['nom'];
+                  $paysGroupe=$lgGroupe['nomPays'];
                   echo "
-                 <tr class='ligneTabQuad'>
-                  <td width='65%' align='left'>$nomGroupe</td>";
-                 // On recherche si des chambres ont déjà été attribuées à ce groupe
-                 // dans l'établissement
-                 $nbOccupGroupe=obtenirNbOccupGroupe($connexion, $idEtab, $idGroupe);
-                echo "
-                   <td width='35%' align='left'>$nbOccupGroupe</td>
-                 </tr>";
+                  <tr class='ligneTabQuad'>
+                    <td width='50%' align='left'>$nomGroupe</td>";
+                    // On recherche si des chambres ont déjà été attribuées à ce groupe
+                    // dans l'établissement
+                    $nbOccupGroupe=obtenirNbOccupGroupe($connexion, $idEtab, $idGroupe);
+                    echo "
+                    <td width='25%' align='left'>$nbOccupGroupe</td>
+                    <td width='25%' align='left'>$paysGroupe</td>
+                  </tr>";
                $lgGroupe=$rsGroupe->fetch(PDO::FETCH_ASSOC);
                 } // Fin de la boucle sur les groupes
       

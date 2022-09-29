@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Festival -  Modifier Attributions'; 
+    $title = 'Accueil > Attributions chambres > Modification Attributions'; 
 ?> 
 <?php ob_start() ?>
 <?php
@@ -14,7 +14,7 @@ $connexion = createConnexion();
 // Recherche du nombre d'établissements offrant des chambres pour le 
 // dimensionnement des colonnes
 $nbEtabOffrantChambres=obtenirNbEtabOffrantChambres($connexion);
-$nb=$nbEtabOffrantChambres+1;
+$nb=$nbEtabOffrantChambres+2;
 // Détermination du pourcentage de largeur des colonnes "établissements"
 $pourcCol=50/$nbEtabOffrantChambres;
 
@@ -32,7 +32,7 @@ if ($modif=='validerModifAttrib')
 }
 
 echo "
-<table width='80%' cellspacing='0' cellpadding='0' align='center' 
+<table width='100%' cellspacing='0' cellpadding='0' align='center' 
 class='tabQuadrille'>";
 
    // AFFICHAGE DE LA 1ÈRE LIGNE D'EN-TÊTE
@@ -44,7 +44,8 @@ class='tabQuadrille'>";
    // AFFICHAGE DE LA 2ÈME LIGNE D'EN-TÊTE (ÉTABLISSEMENTS)
    echo "
    <tr class='ligneTabQuad'>
-      <td>&nbsp;</td>";
+      <td><strong>Nom du groupe</strong></td>
+      <td><strong>Pays d'origine</strong></td>";
       
    $req=obtenirReqEtablissementsOffrantChambres();
    $rsEtab=$connexion->query($req);
@@ -81,13 +82,14 @@ class='tabQuadrille'>";
    {
       $idGroupe=$lgGroupe['id'];
       $nom=$lgGroupe['nom'];
+      $pays=$lgGroupe['nomPays'];
       echo "
       <tr class='ligneTabQuad'>
-         <td width='25%'>$nom</td>";
+         <td width='25%'>$nom</td>
+         <td width='12%'>$pays</td>";
       $req=obtenirReqEtablissementsOffrantChambres();
       $rsEtab=$connexion->query($req);
       $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
-           
       // BOUCLE SUR LES ÉTABLISSEMENTS
       while ($lgEtab!=FALSE)
       {
@@ -142,7 +144,7 @@ echo "
 
 // AFFICHAGE DE LA LÉGENDE
 echo "
-<table align='center' width='80%'>
+<table align='center' width='100%'>
    <tr>
       <td width='34%' align='left'><a href='index.php?action=consultationAttributions'>Retour</a>
       </td>

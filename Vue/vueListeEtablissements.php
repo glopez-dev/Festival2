@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Festival - Liste Etablissements'; 
+    $title = 'Accueil > Etablissements'; 
 ?> 
 <?php ob_start() ?>
 <?php
@@ -40,7 +40,7 @@ class='tabNonQuadrille'>
          else
          {
             echo "
-            <td width='16%'>&nbsp; </td>";          
+            <td width='16%'>(".obtenirNbOccup($connexion,$id). " attributions)</td>";          
 			}
 			echo "
       </tr>";

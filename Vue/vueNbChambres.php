@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Festival -  Supprimer Etablissement'; 
+    $title = 'Accueil > Attribution Chambres > Definir nombre de chambres'; 
 ?> 
 <?php ob_start() ?>
 <?php
