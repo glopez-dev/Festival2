@@ -4,12 +4,12 @@
 <?php ob_start() ?>
 <?php
 
-$connexion = createConnexion();
+$connexion = $modele->createConnexion();
 $id=$_REQUEST['id'];  
 
 // OBTENIR LE DÉTAIL DE L'ÉTABLISSEMENT SÉLECTIONNÉ
 
-$lgEtab=obtenirDetailEtablissement($connexion, $id);
+$lgEtab=$modele->obtenirDetailEtablissement($connexion, $id);
 
 $nom=$lgEtab['nom'];
 $adresseRue=$lgEtab['adresseRue'];

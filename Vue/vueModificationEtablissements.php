@@ -1,6 +1,4 @@
-<?php 
-    $title = 'Accueil > Modifier Etablissement'; 
-?> 
+<?php $title = 'Accueil > Modifier Etablissement'; ?> 
 <?php ob_start() ?>
 <?php
 
@@ -15,7 +13,7 @@ $id=$_REQUEST['id'];
 // affiche les valeurs précédemment contenues dans le formulaire
 if ($modif=='demanderModifEtab')
 {
-   $lgEtab=obtenirDetailEtablissement($connexion, $id);
+   $lgEtab=$modele->obtenirDetailEtablissement($connexion, $id);
   
    $nom=$lgEtab['nom'];
    $adresseRue=$lgEtab['adresseRue'];
@@ -43,11 +41,11 @@ else
    $prenomResponsable=$_REQUEST['prenomResponsable'];
    $nombreChambresOffertes=$_REQUEST['nombreChambresOffertes'];
 
-   verifierDonneesEtabM($connexion, $id, $nom, $adresseRue, $codePostal, $ville,  
+   $modele->verifierDonneesEtabM($connexion, $id, $nom, $adresseRue, $codePostal, $ville,  
                         $tel, $nomResponsable, $nombreChambresOffertes);      
-   if (nbErreurs()==0)
+   if ($modele->nbErreurs()==0)
    {        
-      modifierEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, $ville, 
+      $modele->modifierEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, $ville, 
                             $tel, $adresseElectronique, $type, $civiliteResponsable, 
                             $nomResponsable, $prenomResponsable, $nombreChambresOffertes);
    }
@@ -168,9 +166,9 @@ echo "
 // confirmation
 if ($modif=='validerModifEtab')
 {
-   if (nbErreurs()!=0)
+   if ($modele->nbErreurs()!=0)
    {
-      afficherErreurs();
+      $modele->afficherErreurs();
    }
    else
    {

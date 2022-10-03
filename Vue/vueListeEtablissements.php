@@ -9,8 +9,8 @@ class='tabNonQuadrille'>
    <tr class='enTeteTabNonQuad'>
       <td colspan='4'>Etablissements</td>
    </tr>";
-   $connexion = createConnexion();
-   $req=obtenirReqEtablissements();
+   $connexion = $modele->createConnexion();
+   $req=$modele->obtenirReqEtablissements();
    $rsEtab=$connexion->query($req);
    $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
    // BOUCLE SUR LES ÉTABLISSEMENTS
@@ -30,7 +30,7 @@ class='tabNonQuadrille'>
       	
          // S'il existe déjà des attributions pour l'établissement, il faudra
          // d'abord les supprimer avant de pouvoir supprimer l'établissement
-			if (!existeAttributionsEtab($connexion, $id))
+			if (!($modele->existeAttributionsEtab($connexion, $id)))
 			{
             echo "
             <td width='16%' align='center'> 
@@ -40,7 +40,7 @@ class='tabNonQuadrille'>
          else
          {
             echo "
-            <td width='16%'>(".obtenirNbOccup($connexion,$id). " attributions)</td>";          
+            <td width='16%'>(".$modele->obtenirNbOccup($connexion,$id). " attributions)</td>";          
 			}
 			echo "
       </tr>";
