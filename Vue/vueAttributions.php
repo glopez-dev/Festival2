@@ -1,6 +1,11 @@
+
 <?php $title = 'Accueil > Attributions chambres'; ?>
 
+// ob_start() utilisé pour démarrer la vue en question    ?>
 <?php ob_start() ?>
+
+
+
 <?php
         $nbEtab=obtenirNbEtabOffrantChambres($connexion);
         if ($nbEtab!=0) 
@@ -77,6 +82,7 @@
                 } // Fin de la boucle sur les établissements
             }
 ?>
+
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'pageTemplate.php'; ?>
 <?= $contenu ?>
