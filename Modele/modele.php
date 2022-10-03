@@ -267,18 +267,18 @@ class Modele
       {
          ajouterErreur("Chaque champ suivi du caractère * est obligatoire");
       }
-      if ($nom!="" && estUnNomEtablissement($connexion, 'M', $id, $nom))
+      if ($nom!="" && $this->estUnNomEtablissement($connexion, 'M', $id, $nom))
       {
-         ajouterErreur("L'établissement $nom existe déjà");
+         $this->ajouterErreur("L'établissement $nom existe déjà");
       }
-      if ($codePostal!="" && !estUnCp($codePostal))
+      if ($codePostal!="" && !($this->estUnCp($codePostal)))
       {
-         ajouterErreur("Le code postal doit comporter 5 chiffres");   
+         $this->ajouterErreur("Le code postal doit comporter 5 chiffres");   
       }
-      if ($nombreChambresOffertes!="" && (!estEntier($nombreChambresOffertes) ||
-          !estModifOffreCorrecte($connexion, $id, $nombreChambresOffertes)))
+      if ($nombreChambresOffertes!="" && (!($this->estEntier($nombreChambresOffertes)) ||
+          !($this->estModifOffreCorrecte($connexion, $id, $nombreChambresOffertes))))
       {
-         ajouterErreur("La valeur de l'offre est non entière ou inférieure aux attributions effectuées");
+         $this->ajouterErreur("La valeur de l'offre est non entière ou inférieure aux attributions effectuées");
       }
    }
 
@@ -290,35 +290,35 @@ class Modele
       if ($id=="" || $nom=="" || $adresseRue=="" || $codePostal=="" || $ville==""
           || $tel=="" || $nomResponsable=="" || $nombreChambresOffertes=="")
       {
-         ajouterErreur("Chaque champ suivi du caractère * est obligatoire");
+         $this->ajouterErreur("Chaque champ suivi du caractère * est obligatoire");
       }
       if($id!="")
       {
          // Si l'id est constitué d'autres caractères que de lettres non accentuées 
          // et de chiffres, une erreur est générée
-         if (!estChiffresOuEtLettres($id))
+         if (!($this->estChiffresOuEtLettres($id)))
          {
-            ajouterErreur("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
+            $this->ajouterErreur("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
          }
          else
          {
-            if (estUnIdEtablissement($connexion, $id))
+            if ($this->estUnIdEtablissement($connexion, $id))
             {
-               ajouterErreur("L'établissement $id existe déjà");
+               $this->ajouterErreur("L'établissement $id existe déjà");
             }
          }
       }
-      if ($nom!="" && estUnNomEtablissement($connexion, 'C', $id, $nom))
+      if ($nom!="" && $this->estUnNomEtablissement($connexion, 'C', $id, $nom))
       {
-         ajouterErreur("L'établissement $nom existe déjà");
+         $this->ajouterErreur("L'établissement $nom existe déjà");
       }
-      if ($codePostal!="" && !estUnCp($codePostal))
+      if ($codePostal!="" && !($this->estUnCp($codePostal)))
       {
-         ajouterErreur("Le code postal doit comporter 5 chiffres");   
+         $this->ajouterErreur("Le code postal doit comporter 5 chiffres");   
       }
-      if ($nombreChambresOffertes!="" && !estEntier($nombreChambresOffertes)) 
+      if ($nombreChambresOffertes!="" && !($this->estEntier($nombreChambresOffertes))) 
       {
-         ajouterErreur ("La valeur de l'offre doit être un entier");
+         $this->ajouterErreur ("La valeur de l'offre doit être un entier");
       }
    }
 
