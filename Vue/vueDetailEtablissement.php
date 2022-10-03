@@ -1,27 +1,27 @@
-<?php 
-    $title = 'Accueil > Etablissements > Detail Etablissement'; 
+<?php
+    $title = 'Accueil > Etablissements > Detail Etablissement';
 ?> 
 <?php ob_start() ?>
 <?php
 
 $connexion = $modele->getBdd();
-$id=$_REQUEST['id'];  
+$id = $_REQUEST['id'];
 
 // OBTENIR LE DÉTAIL DE L'ÉTABLISSEMENT SÉLECTIONNÉ
 
-$lgEtab=$modele->obtenirDetailEtablissement($connexion, $id);
+$lgEtab = $modele->obtenirDetailEtablissement($connexion, $id);
 
-$nom=$lgEtab['nom'];
-$adresseRue=$lgEtab['adresseRue'];
-$codePostal=$lgEtab['codePostal'];
-$ville=$lgEtab['ville'];
-$tel=$lgEtab['tel'];
-$adresseElectronique=$lgEtab['adresseElectronique'];
-$type=$lgEtab['typeEtablissement'];
-$civiliteResponsable=$lgEtab['civiliteResponsable'];
-$nomResponsable=$lgEtab['nomResponsable'];
-$prenomResponsable=$lgEtab['prenomResponsable'];
-$nombreChambresOffertes=$lgEtab['nombreChambresOffertes'];
+$nom = $lgEtab['nom'];
+$adresseRue = $lgEtab['adresseRue'];
+$codePostal = $lgEtab['codePostal'];
+$ville = $lgEtab['ville'];
+$tel = $lgEtab['tel'];
+$adresseElectronique = $lgEtab['adresseElectronique'];
+$type = $lgEtab['typeEtablissement'];
+$civiliteResponsable = $lgEtab['civiliteResponsable'];
+$nomResponsable = $lgEtab['nomResponsable'];
+$prenomResponsable = $lgEtab['prenomResponsable'];
+$nombreChambresOffertes = $lgEtab['nombreChambresOffertes'];
 
 echo "
 <table width='60%' cellspacing='0' cellpadding='0' align='center' 
@@ -56,14 +56,11 @@ class='tabNonQuadrille'>
    </tr>
    <tr class='ligneTabNonQuad'>
       <td> Type: </td>";
-      if ($type==1)
-      {
-         echo "<td> Etablissement scolaire </td>";
-      }
-      else
-      {
-         echo "<td> Autre établissement </td>";
-      }
+if ($type == 1) {
+    echo "<td> Etablissement scolaire </td>";
+} else {
+    echo "<td> Autre établissement </td>";
+}
    echo "
    </tr>
    <tr class='ligneTabNonQuad'>
@@ -85,4 +82,4 @@ class='tabNonQuadrille'>
 ?>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'pageTemplate.php'; ?>
-<?= $contenu ?>
+<?php echo $contenu;

@@ -1,4 +1,4 @@
-<?php $title='Festival - Accueil'; ?>
+<?php $title = 'Festival - Accueil'; ?>
 
 
 <?php ob_start(); ?>
@@ -27,7 +27,7 @@
       <ul>
          <li>Gérer les établissements (caractéristiques et capacités d'accueil) acceptant d'héberger les groupes de sportifs.
          <p>
-	      </p>
+          </p>
          <li>Consulter, réaliser ou modifier les attributions des chambres aux groupes dans les établissements.
       </ul>
       </td>
@@ -35,4 +35,4 @@
 </table>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'pageTemplate.php'; ?>
-<?= $contenu ?>
+<?php echo $contenu ?>
