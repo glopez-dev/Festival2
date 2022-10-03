@@ -6,9 +6,7 @@ Idem pour background-color) */
 /* Style de base pour la page (couleur fond : ocre, couleur texte : noir) */
 .basePage 
 {
-   margin : 0;
-   background-image: url('/Contenu/volley.jpg');
-   background-size:cover;
+   background-color:#219EBC;
    color: #023047;
    font:11px Arial, Helvetica, sans-serif;
 }
@@ -16,9 +14,7 @@ Idem pour background-color) */
 /* Style pour le titre (couleur du texte : rouge) */
 .titre 
 {
-   padding: 0px;
-   background-color:#606e7250;
-   backdrop-filter: blur(3px);
+   background-color:#219EBC;
    color:#ffb703;
    font:30px Arial, Helvetica, sans-serif;
    text-align:center;
@@ -68,14 +64,10 @@ table.tabMenu td
 /* Style pour les éléments du menu (mise en gras et italique) */ 
 .menu
 {
-   width: 50vw;
    font:11px Georgia, "Times New Roman", Times, serif;
    font-weight:bold;
    font-style:italic;
    text-align:left;
-
-   padding : 0;
-   
 }
 
 /* STYLES POUR LES TABLEAUX QUADRILLÉS */

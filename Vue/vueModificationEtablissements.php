@@ -1,22 +1,19 @@
+<?php 
+    $title = 'Accueil > Modifier Etablissement'; 
+?> 
+<?php ob_start() ?>
 <?php
-
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
-
-// MODIFIER UN ÉTABLISSEMENT 
 
 // Déclaration du tableau des civilités
 $tabCivilite=["M.","Mme","Melle"];  
-
-$action=$_REQUEST['action'];
+$modif=$_REQUEST['modif'];
+//$action=$_REQUEST['action']; inutile
 $id=$_REQUEST['id'];
 
 // Si on ne "vient" pas de ce formulaire, il faut récupérer les données à partir 
 // de la base (en appelant la fonction obtenirDetailEtablissement) sinon on 
 // affiche les valeurs précédemment contenues dans le formulaire
-if ($action=='demanderModifEtab')
+if ($modif=='demanderModifEtab')
 {
    $lgEtab=obtenirDetailEtablissement($connexion, $id);
   
@@ -57,8 +54,8 @@ else
 }
 
 echo "
-<form method='POST' action='modificationEtablissement.php?'>
-   <input type='hidden' value='validerModifEtab' name='action'>
+<form method='POST' action='index.php?&action=modificationEtablissements'>
+   <input type='hidden' value='validerModifEtab' name='modif'>
    <table width='85%' cellspacing='0' cellpadding='0' align='center' 
    class='tabNonQuadrille'>
    
@@ -160,7 +157,7 @@ echo "
          </td>
       </tr>
       <tr>
-         <td colspan='2' align='center'><a href='listeEtablissements.php'>Retour</a>
+         <td colspan='2' align='center'><a href='index.php?action=listeEtablissements'>Retour</a>
          </td>
       </tr>
    </table>
@@ -169,7 +166,7 @@ echo "
 
 // En cas de validation du formulaire : affichage des erreurs ou du message de 
 // confirmation
-if ($action=='validerModifEtab')
+if ($modif=='validerModifEtab')
 {
    if (nbErreurs()!=0)
    {
@@ -183,3 +180,6 @@ if ($action=='validerModifEtab')
 }
 
 ?>
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>

@@ -5,8 +5,8 @@
 function createConnexion()
 {
    $host="localhost";
-   $user="root";
-   $mdp="";
+   $user="pdoFestival";
+   $mdp="123456";
    
    $dsn = 'mysql:host=localhost;dbname=festival'; 
    $dbh= new PDO($dsn, $user, $mdp); 
@@ -14,25 +14,22 @@ function createConnexion()
    return $dbh;
 }
 
-function tryConnexion() {
-   $connexion = createConnexion();
+function tryConnexion($connexion) {
    if (!$connexion) {
-       //ajouterErreur("Echec de la connexion au serveur MySql");
-       throw new Exception("Echec de la connexion au serveur MySql");
-       afficherErreurs();
-       exit();
+       ajouterErreur("Echec de la connexion au serveur MySql");
+       //afficherErreurs();
+       //exit();
     }
     if (!tryQuery($connexion))
     {
-       //ajouterErreur("La base de données festival est inexistante ou non accessible");
-       throw new Exception("La base de données festival est inexistante ou non accessible");
-       afficherErreurs();
-       exit();
+       ajouterErreur("La base de données festival est inexistante ou non accessible");
+       //afficherErreurs();
+       //exit();
     }
 }
 
 // inutile ???
-function tryQuery($connexion, $base)
+function tryQuery($connexion)
 {
    //$bd="festival"; INUTILE ?
    $query="SET CHARACTER SET utf8";
@@ -175,7 +172,7 @@ function estModifOffreCorrecte($connexion, $idEtab, $nombreChambres)
 
 function obtenirReqIdNomGroupesAHeberger()
 {
-   $req="select id, nom from Groupe where hebergement='O' order by id";
+   $req="select id, nom, nomPays from Groupe where hebergement='O' order by id";
    return $req;
 }
 
@@ -232,7 +229,7 @@ function modifierAttribChamb($connexion, $idEtab, $idGroupe, $nbChambres)
 // dans l'établissement transmis
 function obtenirReqGroupesEtab($id)
 {
-   $req="select distinct id, nom from Groupe, Attribution where 
+   $req="select distinct id, nom, nomPays from Groupe, Attribution where 
         Attribution.idGroupe=Groupe.id and idEtab='$id'";
    return $req;
 }
@@ -341,22 +338,26 @@ function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal,
 
 // FONCTIONS DE GESTION DES ERREURS
 
-function ajouterErreur($msg)
+// stocke l'exception $e attrapée par le catch dans un array
+function ajouterErreur($message) 
 {
-   if (! isset($_REQUEST['erreurs']))
-      $_REQUEST['erreurs']=array();
-   $_REQUEST['erreurs'][]=$msg;
+   $e = new Exception($message);
+   if (!isset($ERROR)) 
+   {
+      $ERROR['erreurs']=array();
+   }  
+   $ERROR['erreurs'][]=$e;
 }
 
 function nbErreurs()
 {
-   if (!isset($_REQUEST['erreurs']))
+   if (!isset($ERROR['erreurs']))
    {
 	   return 0;
 	}
 	else
 	{
-	   return count($_REQUEST['erreurs']);
+	   return count($ERROR['erreurs']);
 	}
 }
  
@@ -364,9 +365,9 @@ function afficherErreurs()
 {
    echo '<div class="msgErreur">';
    echo '<ul>';
-   foreach($_REQUEST['erreurs'] as $erreur)
+   foreach($ERROR['erreurs'] as $erreur)
 	{
-      echo "<li>$erreur</li>";
+      echo "<li>$erreur->getMessage()</li>";
 	}
    echo '</ul>';
    echo '</div>';

@@ -1,9 +1,10 @@
+<?php 
+    $title = 'Accueil > Attributions chambres > Modification Attributions'; 
+?> 
+<?php ob_start() ?>
 <?php
-
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
+// Connexion à la base 'festival'
+$connexion = createConnexion();
 // EFFECTUER OU MODIFIER LES ATTRIBUTIONS POUR L'ENSEMBLE DES ÉTABLISSEMENTS
 
 // CETTE PAGE CONTIENT UN TABLEAU CONSTITUÉ DE 2 LIGNES D'EN-TÊTE (LIGNE TITRE ET 
@@ -13,16 +14,16 @@ include("_controlesEtGestionErreurs.inc.php");
 // Recherche du nombre d'établissements offrant des chambres pour le 
 // dimensionnement des colonnes
 $nbEtabOffrantChambres=obtenirNbEtabOffrantChambres($connexion);
-$nb=$nbEtabOffrantChambres+1;
+$nb=$nbEtabOffrantChambres+2;
 // Détermination du pourcentage de largeur des colonnes "établissements"
 $pourcCol=50/$nbEtabOffrantChambres;
 
-$action=$_REQUEST['action'];
+$modif=$_REQUEST['modif'];
 
 // Si l'action est validerModifAttrib (cas où l'on vient de la page 
 // donnerNbChambres.php) alors on effectue la mise à jour des attributions dans 
 // la base 
-if ($action=='validerModifAttrib')
+if ($modif=='validerModifAttrib')
 {
    $idEtab=$_REQUEST['idEtab'];
    $idGroupe=$_REQUEST['idGroupe'];
@@ -31,7 +32,7 @@ if ($action=='validerModifAttrib')
 }
 
 echo "
-<table width='80%' cellspacing='0' cellpadding='0' align='center' 
+<table width='100%' cellspacing='0' cellpadding='0' align='center' 
 class='tabQuadrille'>";
 
    // AFFICHAGE DE LA 1ÈRE LIGNE D'EN-TÊTE
@@ -43,7 +44,8 @@ class='tabQuadrille'>";
    // AFFICHAGE DE LA 2ÈME LIGNE D'EN-TÊTE (ÉTABLISSEMENTS)
    echo "
    <tr class='ligneTabQuad'>
-      <td>&nbsp;</td>";
+      <td><strong>Nom du groupe</strong></td>
+      <td><strong>Pays d'origine</strong></td>";
       
    $req=obtenirReqEtablissementsOffrantChambres();
    $rsEtab=$connexion->query($req);
@@ -80,13 +82,14 @@ class='tabQuadrille'>";
    {
       $idGroupe=$lgGroupe['id'];
       $nom=$lgGroupe['nom'];
+      $pays=$lgGroupe['nomPays'];
       echo "
       <tr class='ligneTabQuad'>
-         <td width='25%'>$nom</td>";
+         <td width='25%'>$nom</td>
+         <td width='12%'>$pays</td>";
       $req=obtenirReqEtablissementsOffrantChambres();
       $rsEtab=$connexion->query($req);
       $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
-           
       // BOUCLE SUR LES ÉTABLISSEMENTS
       while ($lgEtab!=FALSE)
       {
@@ -112,7 +115,7 @@ class='tabQuadrille'>";
             $nbMax = $nbChLib + $nbOccupGroupe;
             echo "
             <td class='reserve'>
-            <a href='donnerNbChambres.php?idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbMax'>
+            <a href='index.php?action=donnerNbChambres&amp;idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbMax'>
             $nbOccupGroupe</a></td>";
          }
          else
@@ -124,7 +127,7 @@ class='tabQuadrille'>";
             {
                echo "
                <td class='reserveSiLien'>
-               <a href='donnerNbChambres.php?idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbChLib'>
+               <a href='index.php?action=donnerNbChambres&amp;idEtab=$idEtab&amp;idGroupe=$idGroupe&amp;nbChambres=$nbChLib'>
                __</a></td>";
             }
             else
@@ -141,9 +144,9 @@ echo "
 
 // AFFICHAGE DE LA LÉGENDE
 echo "
-<table align='center' width='80%'>
+<table align='center' width='100%'>
    <tr>
-      <td width='34%' align='left'><a href='consultationAttributions.php'>Retour</a>
+      <td width='34%' align='left'><a href='index.php?action=consultationAttributions'>Retour</a>
       </td>
       <td class='reserveSiLien'>&nbsp;</td>
       <td width='30%' align='left'>Réservation possible si lien</td>
@@ -153,3 +156,7 @@ echo "
 </table>";
 
 ?>
+
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>

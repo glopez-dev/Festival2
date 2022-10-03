@@ -1,20 +1,17 @@
+<?php 
+    $title = 'Accueil > Création Etablissement'; 
+?> 
+<?php ob_start() ?>
 <?php
-
-include("_debut.inc.php");
-include("_gestionBase.inc.php"); 
-include("_controlesEtGestionErreurs.inc.php");
-
 // CRÉER UN ÉTABLISSEMENT 
 
 // Déclaration du tableau des civilités
 $tabCivilite=["M.","Mme","Melle"];  
-
-$action=$_REQUEST['action'];
-
+$modif=$_REQUEST['modif'];
 // S'il s'agit d'une création et qu'on ne "vient" pas de ce formulaire (on 
 // "vient" de ce formulaire uniquement s'il y avait une erreur), il faut définir 
 // les champs à vide sinon on affichera les valeurs précédemment saisies
-if ($action=='demanderCreEtab') 
+if ($modif=='demanderCreEtab') 
 {  
    $id='';
    $nom='';
@@ -45,7 +42,8 @@ else
    $nombreChambresOffertes=$_REQUEST['nombreChambresOffertes'];
 
    verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, 
-                        $tel, $nomResponsable, $nombreChambresOffertes);      
+                        $tel, $nomResponsable, $nombreChambresOffertes); 
+   echo nbErreurs();    
    if (nbErreurs()==0)
    {        
       creerEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, $ville,  
@@ -55,8 +53,8 @@ else
 }
 
 echo "
-<form method='POST' action='creationEtablissement.php?'>
-   <input type='hidden' value='validerCreEtab' name='action'>
+<form method='POST' action='index.php?action=creationEtablissement&amp;modif=validerCreEtab'>
+   <input type='hidden' value='validerCreEtab' name='modif'>
    <table width='85%' align='center' cellspacing='0' cellpadding='0' 
    class='tabNonQuadrille'>
    
@@ -160,7 +158,7 @@ echo "
          </td>
       </tr>
       <tr>
-         <td colspan='2' align='center'><a href='listeEtablissements.php'>Retour</a>
+         <td colspan='2' align='center'><a href='index.php?action=listeEtablissements'>Retour</a>
          </td>
       </tr>
    </table>
@@ -168,7 +166,7 @@ echo "
 
 // En cas de validation du formulaire : affichage des erreurs ou du message de 
 // confirmation
-if ($action=='validerCreEtab')
+if ($modif=='validerCreEtab')
 {
    if (nbErreurs()!=0)
    {
@@ -182,3 +180,6 @@ if ($action=='validerCreEtab')
 }
 
 ?>
+<?php $contenu = ob_get_clean(); ?>
+<?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>

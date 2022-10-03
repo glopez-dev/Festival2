@@ -2,7 +2,7 @@
 
 
 <?php ob_start(); ?>
-<table width='80%' cellspacing='0' cellpadding='0' align='center'>
+<table width='80%%' cellspacing='0' cellpadding='0' align='center'>
    <tr>  
       <td class='texteAccueil'>
          Cette application web permet de gérer l'hébergement des équipes sportives 
@@ -35,3 +35,4 @@
 </table>
 <?php $contenu = ob_get_clean(); ?>
 <?php require 'pageTemplate.php'; ?>
+<?= $contenu ?>
