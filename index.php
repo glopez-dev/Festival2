@@ -11,8 +11,7 @@
    catch (Exception $e) 
    {
       $modele = new Modele();
-      $msgErreur = $e->getMessage();
-      $modele->ajouterErreur($msgErreur);
+      $modele->setErreur($e);
       require 'Vue/vueErreur.php';
    }
 ?>
