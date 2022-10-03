@@ -32,7 +32,7 @@ if ($modif=='validerModifAttrib')
 }
 
 echo "
-<table width='100%' cellspacing='0' cellpadding='0' align='center' 
+<table width='80%' cellspacing='0' cellpadding='0' align='center' 
 class='tabQuadrille'>";
 
    // AFFICHAGE DE LA 1ÈRE LIGNE D'EN-TÊTE
@@ -144,7 +144,7 @@ echo "
 
 // AFFICHAGE DE LA LÉGENDE
 echo "
-<table align='center' width='100%'>
+<table align='center' width='80%'>
    <tr>
       <td width='34%' align='left'><a href='index.php?action=consultationAttributions'>Retour</a>
       </td>
