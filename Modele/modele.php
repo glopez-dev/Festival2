@@ -150,7 +150,7 @@ class Modele
    // Retourne true dans le cas contraire
    public function estModifOffreCorrecte($connexion, $idEtab, $nombreChambres)
    {
-      $nbOccup=obtenirNbOccup($connexion, $idEtab);
+      $nbOccup=$this->obtenirNbOccup($connexion, $idEtab);
       return ($nombreChambres>=$nbOccup);
    }
 
@@ -240,7 +240,7 @@ class Modele
    public function estUnCp($codePostal)
    {
       // Le code postal doit comporter 5 chiffres
-      return strlen($codePostal)== 5 && estEntier($codePostal);
+      return strlen($codePostal)== 5 && $this->estEntier($codePostal);
    }
 
    // Si la valeur transmise ne contient pas d'autres caractères que des chiffres, 
@@ -265,11 +265,11 @@ class Modele
       if ($nom=="" || $adresseRue=="" || $codePostal=="" || $ville=="" || 
           $tel=="" || $nomResponsable=="" || $nombreChambresOffertes=="")
       {
-         ajouterErreur("Chaque champ suivi du caractère * est obligatoire");
+         $this ->ajouterErreur("Chaque champ suivi du caractère * est obligatoire");
       }
-      if ($nom!="" && estUnNomEtablissement($connexion, 'M', $id, $nom))
+      if ($nom!="" && $this->estUnNomEtablissement($connexion, 'M', $id, $nom))
       {
-         ajouterErreur("L'établissement $nom existe déjà");
+         $this->ajouterErreur("L'établissement $nom existe déjà");
       }
       if ($codePostal!="" && !estUnCp($codePostal))
       {
