@@ -18,8 +18,8 @@ class Modele
    {
       if (!$connexion) 
       {
-       $this->setErreur("Echec de la connexion au serveur MySql");
-       //afficherErreurs();
+       throw new Exception("Echec de la connexion au serveur MySql");
+       //getErreurs();
        //exit();
       }
    }
@@ -232,7 +232,10 @@ class Modele
       else
          return 0;
    }
+} 
 
+class Erreurs extends Modele 
+{
    // FONCTIONS DE CONTRÔLE DE SAISIE
 
    // Si $codePostal a une longueur de 5 caractères et est de type entier, on 
@@ -284,8 +287,8 @@ class Modele
 
    // Fonction qui vérifie la saisie lors de la création d'un établissement. 
    // Pour chaque champ non valide, un message est ajouté à la liste des erreurs
-   public function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, 
-                                 $ville, $tel, $nomResponsable, $nombreChambresOffertes)
+
+   public function verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, $tel, $nomResponsable, $nombreChambresOffertes)
    {
       if ($id=="" || $nom=="" || $adresseRue=="" || $codePostal=="" || $ville==""
           || $tel=="" || $nomResponsable=="" || $nombreChambresOffertes=="")
@@ -321,40 +324,41 @@ class Modele
          $this->setErreur ("La valeur de l'offre doit être un entier");
       }
    }
-      // FONCTIONS DE GESTION DES ERREURS
-
-      // private $ERROR['erreurs']=array();
       
+   // FONCTIONS DE GESTION DES ERREURS
 
-      // stocke l'exception $e attrapée par le catch dans un array
-      public function setErreur($e) 
-      {
-         $ERROR['erreurs'][]=$e;
-      }
+   public $tabExceptions = array();
    
-      public function nbErreurs()
+   // stocke l'exception $e attrapée par le catch dans un array
+   public function setErreur($e) 
+   {
+      $tabExceptions['erreurs'][]=$e;
+   }
+
+   public function nbErreurs()
+   {
+      if (!isset($tabExceptions['erreurs']))
       {
-         if (!isset($ERROR['erreurs']))
-         {
-            return 0;
-         }
-         else
-         {
-            return count($ERROR['erreurs']);
-         }
+         return 0;
       }
-      
-      public function afficherErreurs()
+      else
       {
-         echo '<div class="msgErreur">';
-         echo '<ul>';
-         foreach($ERROR['erreurs'] as $erreur)
-         {
-            echo "<li>$erreur->getMessage()</li>";
-         }
-         echo '</ul>';
-         echo '</div>';
-      } 
+         return count($tabExceptions['erreurs']);
+      }
+   }
+   
+   public function getErreurs()
+   {
+      echo '<div class="msgErreur">';
+      echo '<ul>';
+      foreach($tabExceptions as $erreur)
+      {
+         echo "<li>$erreur->getMessage()</li>";
+      }
+      echo '</ul>';
+      echo '</div>';
+   } 
 }
+
 
 ?>

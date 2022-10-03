@@ -168,7 +168,7 @@ if ($modif=='validerModifEtab')
 {
    if ($modele->nbErreurs()!=0)
    {
-      $modele->afficherErreurs();
+      $modele->getErreurs();
    }
    else
    {

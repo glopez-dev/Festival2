@@ -10,7 +10,7 @@
    } 
    catch (Exception $e) 
    {
-      $modele = new Modele();
+      $modele = new Erreurs();
       $modele->setErreur($e);
       require 'Vue/vueErreur.php';
    }

@@ -170,7 +170,7 @@ if ($modif=='validerCreEtab')
 {
    if ($modele->nbErreurs()!=0)
    {
-      $modele->afficherErreurs();
+      $modele->getErreurs();
    }
    else
    {
