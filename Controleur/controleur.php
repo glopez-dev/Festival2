@@ -2,84 +2,88 @@
 
     require 'Modele/modele.php';
 
-    // ON DEFINIT D'ABORD TOUTES LES FONCTIONS APPELANT DES VUES
-
-    function accueil() {
+class Controleur 
+{
+    // ON DEFINIT D'ABORD TOUTES LES FONCTIONS APPELANT DES VUE
+    public function accueil() {
         require 'Vue/vueAccueil.php';
     }
 
-    function listeEtablissements($connexion) {
+    public function listeEtablissements($connexion) {
         require 'Vue/vueListeEtablissements.php';
     }
 
-    function creationEtablissement($connexion) {
+    public function creationEtablissement($connexion) {
         $modif=$_REQUEST['modif'];
         require 'Vue/vueCreationEtablissement.php';
     }
 
-    function modificationEtablissements($connexion) {
+    public function modificationEtablissements($connexion) {
         $modif=$_REQUEST['modif'];
         require 'Vue/vueModificationEtablissements.php';
     }
 
-    function modificationAttributions($connexion) {
+    public function modificationAttributions($connexion) {
+        $this->$connexion = $connexion;
         require 'Vue/vueModificationAttributions.php';
     }
 
-    function supressionEtablissement($connexion) {
+    public function supressionEtablissement($connexion) {
         require 'Vue/vueSupressionEtablissements.php';
     }
 
-    function detailEtablissement($connexion) {
+    public function detailEtablissement($connexion) {
         require 'Vue/vueDetailEtablissement.php';
     }
     
-    function consultationAttributions($connexion) {
+    public function consultationAttributions($connexion) {
         require 'Vue/vueAttributions.php';
     }
 
-    function donnerNbChambres($connexion) {
+    public function donnerNbChambres($connexion) {
         require 'Vue/vueNbChambres.php';
     }
 
     // PUIS ON DEFINIT LE CONTROLEUR FRONTAL
 
-    function displayVue ($connexion) {
+    public function displayVue ($connexion) {
     
         if (isset($_GET['action'])){
             switch ($_GET['action']){
                 case 'listeEtablissements' :
-                    listeEtablissements($connexion);
+                    $this->listeEtablissements($connexion);
                     break;
                 case 'consultationAttributions' :
-                    consultationAttributions($connexion);
+                    $this->consultationAttributions($connexion);
                     break;
                 case 'creationEtablissement' :
-                    creationEtablissement($connexion);
+                    $this->creationEtablissement($connexion);
                     break;
                 case 'modificationEtablissements' :
-                    modificationEtablissements($connexion);
+                    $this->modificationEtablissements($connexion);
                     break;
                 case 'supressionEtablissements' :
-                    supressionEtablissement($connexion);
+                    $this->supressionEtablissement($connexion);
                     break;
                 case 'detailEtablissement':
-                    detailEtablissement($connexion);
+                    $this->detailEtablissement($connexion);
                     break;
                 case 'modificationAttributions' :
-                    modificationAttributions($connexion);
+                    $this->modificationAttributions($connexion);
                     break;
                 case 'donnerNbChambres' : 
-                    donnerNbChambres($connexion);
+                    $this->donnerNbChambres($connexion);
                     break;
                 default : 
-                    throw new Exception("Action non reconnue par le contôleur");
+                    throw new Exception("Action non reconnue par le contrôleur");
                     break;
             }
         } 
         else { 
-            accueil(); 
+            $this->accueil(); 
         }
     }
 
+    
+}
     
