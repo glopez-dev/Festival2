@@ -7,7 +7,7 @@
 
 
 <?php
-        $nbEtab=obtenirNbEtabOffrantChambres($connexion);
+        $nbEtab=$modele->obtenirNbEtabOffrantChambres($connexion);
         if ($nbEtab!=0) 
             {  
                 echo "<table width='75%' cellspacing='0' cellpadding='0' align='center'
@@ -17,7 +17,7 @@
    
                 // POUR CHAQUE ÉTABLISSEMENT : AFFICHAGE D'UN TABLEAU COMPORTANT 2 LIGNES 
                 // D'EN-TÊTE ET LE DÉTAIL DES ATTRIBUTIONS
-                $req=obtenirReqEtablissementsAyantChambresAttribuées();
+                $req=$modele->obtenirReqEtablissementsAyantChambresAttribuées();
                 $rsEtab=$connexion->query($req);
                 $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
                 // BOUCLE SUR LES ÉTABLISSEMENTS AYANT DÉJÀ DES CHAMBRES ATTRIBUÉES
@@ -31,7 +31,7 @@
                     class='tabQuadrille'>";
       
                     $nbOffre=$lgEtab["nombreChambresOffertes"];
-                    $nbOccup=obtenirNbOccup($connexion, $idEtab);
+                    $nbOccup=$modele->obtenirNbOccup($connexion, $idEtab);
                   // Calcul du nombre de chambres libres dans l'établissement
                   $nbChLib = $nbOffre - $nbOccup;
       
@@ -53,7 +53,7 @@
         
                 // AFFICHAGE DU DÉTAIL DES ATTRIBUTIONS : UNE LIGNE PAR GROUPE AFFECTÉ 
                  // DANS L'ÉTABLISSEMENT       
-                 $req=obtenirReqGroupesEtab($idEtab);
+                 $req=$modele->obtenirReqGroupesEtab($idEtab);
                  $rsGroupe=$connexion->query($req);
                  $lgGroupe=$rsGroupe->fetch(PDO::FETCH_ASSOC);
                
@@ -68,7 +68,7 @@
                     <td width='50%' align='left'>$nomGroupe</td>";
                     // On recherche si des chambres ont déjà été attribuées à ce groupe
                     // dans l'établissement
-                    $nbOccupGroupe=obtenirNbOccupGroupe($connexion, $idEtab, $idGroupe);
+                    $nbOccupGroupe=$modele->obtenirNbOccupGroupe($connexion, $idEtab, $idGroupe);
                     echo "
                     <td width='25%' align='left'>$nbOccupGroupe</td>
                     <td width='25%' align='left'>$paysGroupe</td>

@@ -4,7 +4,7 @@
 <?php ob_start() ?>
 <?php
 $id=$_REQUEST['id'];  
-$lgEtab=obtenirDetailEtablissement($connexion, $id);
+$lgEtab=$modele->obtenirDetailEtablissement($connexion, $id);
 $nom=$lgEtab['nom'];
 
 // Cas 1ère étape (on vient de index.php?action=listeEtablissements)
@@ -23,7 +23,7 @@ if ($_REQUEST['modif']=='demanderSupprEtab')
 
 else if ($_REQUEST['modif']=='validerSupprEtab')
 {
-   supprimerEtablissement($connexion, $id);
+   $modele->supprimerEtablissement($connexion, $id);
    echo "
    <br><br><center><h5>L'établissement $nom a été supprimé</h5>
    <a href='index.php?action=listeEtablissements'>Retour</a></center>";

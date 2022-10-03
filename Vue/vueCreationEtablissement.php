@@ -41,12 +41,12 @@ else
    $prenomResponsable=$_REQUEST['prenomResponsable'];
    $nombreChambresOffertes=$_REQUEST['nombreChambresOffertes'];
 
-   verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, 
+   $modele->verifierDonneesEtabC($connexion, $id, $nom, $adresseRue, $codePostal, $ville, 
                         $tel, $nomResponsable, $nombreChambresOffertes); 
-   echo nbErreurs();    
-   if (nbErreurs()==0)
+   echo $modele->nbErreurs();    
+   if ($modele->nbErreurs()==0)
    {        
-      creerEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, $ville,  
+      $modele->creerEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, $ville,  
                          $tel, $adresseElectronique, $type, $civiliteResponsable, 
                          $nomResponsable, $prenomResponsable, $nombreChambresOffertes);
    }
@@ -168,9 +168,9 @@ echo "
 // confirmation
 if ($modif=='validerCreEtab')
 {
-   if (nbErreurs()!=0)
+   if ($modele->nbErreurs()!=0)
    {
-      afficherErreurs();
+      $modele->afficherErreurs();
    }
    else
    {

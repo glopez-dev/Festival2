@@ -15,7 +15,7 @@ echo "
 	<input type='hidden' value='validerModifAttrib' name='modif'>
    <input type='hidden' value='$idEtab' name='idEtab'>
    <input type='hidden' value='$idGroupe' name='idGroupe'>";
-   $nomGroupe=obtenirNomGroupe($connexion, $idGroupe);
+   $nomGroupe=$modele->obtenirNomGroupe($connexion, $idGroupe);
    
    echo "
    <br><center><h5>Combien de chambres souhaitez-vous pour le 

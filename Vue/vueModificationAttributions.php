@@ -13,7 +13,7 @@ $connexion = $modele->getConnexion();
 
 // Recherche du nombre d'établissements offrant des chambres pour le 
 // dimensionnement des colonnes
-$nbEtabOffrantChambres=obtenirNbEtabOffrantChambres($connexion);
+$nbEtabOffrantChambres=$modele->obtenirNbEtabOffrantChambres($connexion);
 $nb=$nbEtabOffrantChambres+2;
 // Détermination du pourcentage de largeur des colonnes "établissements"
 $pourcCol=50/$nbEtabOffrantChambres;
@@ -28,7 +28,7 @@ if ($modif=='validerModifAttrib')
    $idEtab=$_REQUEST['idEtab'];
    $idGroupe=$_REQUEST['idGroupe'];
    $nbChambres=$_REQUEST['nbChambres'];
-   modifierAttribChamb($connexion, $idEtab, $idGroupe, $nbChambres);
+   $modele->modifierAttribChamb($connexion, $idEtab, $idGroupe, $nbChambres);
 }
 
 echo "
@@ -47,7 +47,7 @@ class='tabQuadrille'>";
       <td><strong>Nom du groupe</strong></td>
       <td><strong>Pays d'origine</strong></td>";
       
-   $req=obtenirReqEtablissementsOffrantChambres();
+   $req=$modele->obtenirReqEtablissementsOffrantChambres();
    $rsEtab=$connexion->query($req);
    $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
 
@@ -58,7 +58,7 @@ class='tabQuadrille'>";
       $idEtab=$lgEtab["id"];
       $nom=$lgEtab["nom"];
       $nbOffre=$lgEtab["nombreChambresOffertes"];
-      $nbOccup=obtenirNbOccup($connexion, $idEtab);
+      $nbOccup=$modele->obtenirNbOccup($connexion, $idEtab);
                     
       // Calcul du nombre de chambres libres
       $nbChLib = $nbOffre - $nbOccup;
@@ -73,7 +73,7 @@ class='tabQuadrille'>";
    // CORPS DU TABLEAU : CONSTITUTION D'UNE LIGNE PAR GROUPE À HÉBERGER AVEC LES 
    // CHAMBRES ATTRIBUÉES ET LES LIENS POUR EFFECTUER OU MODIFIER LES ATTRIBUTIONS
          
-   $req=obtenirReqIdNomGroupesAHeberger();
+   $req=$modele->obtenirReqIdNomGroupesAHeberger();
    $rsGroupe=$connexion->query($req);
    $lgGroupe=$rsGroupe->fetch(PDO::FETCH_ASSOC);
          
@@ -87,7 +87,7 @@ class='tabQuadrille'>";
       <tr class='ligneTabQuad'>
          <td width='25%'>$nom</td>
          <td width='12%'>$pays</td>";
-      $req=obtenirReqEtablissementsOffrantChambres();
+      $req=$modele->obtenirReqEtablissementsOffrantChambres();
       $rsEtab=$connexion->query($req);
       $lgEtab=$rsEtab->fetch(PDO::FETCH_ASSOC);
       // BOUCLE SUR LES ÉTABLISSEMENTS
@@ -95,14 +95,14 @@ class='tabQuadrille'>";
       {
          $idEtab=$lgEtab["id"];
          $nbOffre=$lgEtab["nombreChambresOffertes"];
-         $nbOccup=obtenirNbOccup($connexion, $idEtab);
+         $nbOccup=$modele->obtenirNbOccup($connexion, $idEtab);
                    
          // Calcul du nombre de chambres libres
          $nbChLib = $nbOffre - $nbOccup;
                   
          // On recherche si des chambres ont déjà été attribuées à ce groupe
          // dans cet établissement
-         $nbOccupGroupe=obtenirNbOccupGroupe($connexion, $idEtab, $idGroupe);
+         $nbOccupGroupe=$modele->obtenirNbOccupGroupe($connexion, $idEtab, $idGroupe);
          
          // Cas où des chambres ont déjà été attribuées à ce groupe dans cet
          // établissement
