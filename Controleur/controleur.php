@@ -100,5 +100,3 @@
             }
         require '../Vue/vueAttributions.php';
     }
-
-    
