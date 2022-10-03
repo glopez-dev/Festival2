@@ -4,7 +4,7 @@
 <?php ob_start() ?>
 <?php
 
-$connexion = $modele->createConnexion();
+$connexion = $modele->getBdd();
 $id=$_REQUEST['id'];  
 
 // OBTENIR LE DÉTAIL DE L'ÉTABLISSEMENT SÉLECTIONNÉ

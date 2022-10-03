@@ -1,11 +1,6 @@
 
 <?php $title = 'Accueil > Attributions chambres'; ?>
-
-// ob_start() utilisé pour démarrer la vue en question    ?>
-<?php ob_start() ?>
-
-
-
+<?php ob_start(); ?>
 <?php
         $nbEtab=$modele->obtenirNbEtabOffrantChambres($connexion);
         if ($nbEtab!=0) 

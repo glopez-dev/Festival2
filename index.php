@@ -6,7 +6,7 @@
       $controleur = new Controleur();
       $connexion = $modele->getBdd(); // Creates a new connexion to the database
       $modele->tryConnexion($connexion); // Tests database connexion
-      $controleur->displayVue($connexion); // This public function implements a front controller
+      $controleur->displayVue($connexion, $modele); // This public function implements a front controller
    } 
    catch (Exception $e) 
    {
