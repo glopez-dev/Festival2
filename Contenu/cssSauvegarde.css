@@ -142,7 +142,7 @@ tr.ligneTabNonQuad td
 /* STYLE POUR LES MESSAGES D'ERREUR AFFICHÉS EN BAS DE PAGE (FOND : OCRE, 
 COULEUR DU TEXTE : ROSE) */
 
-.msgErreur
+.msgError
 {
    background-color:#FFDD88;
    color:#FF00CC;

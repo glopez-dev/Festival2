@@ -10,8 +10,8 @@ try
 } 
 catch (Exception $e) 
 {
-    $modele = new Erreurs();
-    $modele->setErreur($e);
-    include 'Vue/vueErreur.php';
+    $errors = new Errors();
+    $errors->setError($e);
+    include 'Vue/vueError.php';
 }
 ?>

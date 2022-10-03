@@ -49,8 +49,8 @@ if ($modif == 'demanderCreEtab') {
         $nomResponsable,
         $nombreChambresOffertes
     );
-    echo $modele->nbErreurs();
-    if ($modele->nbErreurs() == 0) {
+    echo $modele->countErrors();
+    if ($modele->countErrors() == 0) {
         $modele->creerEtablissement(
             $connexion,
             $id,
@@ -179,8 +179,8 @@ for ($i = 0; $i < 3; $i = $i + 1) {
 // En cas de validation du formulaire : affichage des erreurs ou du message de
 // confirmation
 if ($modif == 'validerCreEtab') {
-    if ($modele->nbErreurs() != 0) {
-        $modele->getErreurs();
+    if ($modele->countErrors() != 0) {
+        $modele->getErrors();
     } else {
         echo "
       <h5><center>La création de l'établissement a été effectuée</center></h5>";

@@ -18,7 +18,7 @@ class Modele
     {
         if (!$connexion) {
             throw new Exception("Echec de la connexion au serveur MySql");
-            //getErreurs();
+            //getErrors();
             //exit();
         }
     }
@@ -234,7 +234,7 @@ class Modele
     }
 } 
 
-class Erreurs extends Modele
+class Errors extends Modele
 {
     // FONCTIONS DE CONTRÔLE DE SAISIE
 
@@ -268,18 +268,18 @@ class Erreurs extends Modele
         if ($nom=="" || $adresseRue=="" || $codePostal=="" || $ville==""  
             || $tel=="" || $nomResponsable=="" || $nombreChambresOffertes==""
         ) {
-            $this ->setErreur("Chaque champ suivi du caractère * est obligatoire");
+            $this ->setError("Chaque champ suivi du caractère * est obligatoire");
         }
         if ($nom!="" && $this->estUnNomEtablissement($connexion, 'M', $id, $nom)) {
-            $this->setErreur("L'établissement $nom existe déjà");
+            $this->setError("L'établissement $nom existe déjà");
         }
         if ($codePostal!="" && !($this->estUnCp($codePostal))) {
-            $this->setErreur("Le code postal doit comporter 5 chiffres");   
+            $this->setError("Le code postal doit comporter 5 chiffres");   
         }
         if ($nombreChambresOffertes!="" && (!($this->estEntier($nombreChambresOffertes)) 
             || !($this->estModifOffreCorrecte($connexion, $id, $nombreChambresOffertes)))
         ) {
-            $this->setErreur("La valeur de l'offre est non entière ou inférieure aux attributions effectuées");
+            $this->setError("La valeur de l'offre est non entière ou inférieure aux attributions effectuées");
         }
     }
 
@@ -291,29 +291,29 @@ class Erreurs extends Modele
         if ($id=="" || $nom=="" || $adresseRue=="" || $codePostal=="" || $ville==""
             || $tel=="" || $nomResponsable=="" || $nombreChambresOffertes==""
         ) {
-            $this->setErreur("Chaque champ suivi du caractère * est obligatoire");
+            $this->setError("Chaque champ suivi du caractère * est obligatoire");
         }
         if($id!="") {
             // Si l'id est constitué d'autres caractères que de lettres non accentuées 
             // et de chiffres, une erreur est générée
             if (!($this->estChiffresOuEtLettres($id))) {
-                $this->setErreur("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
+                $this->setError("L'identifiant doit comporter uniquement des lettres non accentuées et des chiffres");
             }
             else
             {
                 if ($this->estUnIdEtablissement($connexion, $id)) {
-                    $this->setErreur("L'établissement $id existe déjà");
+                    $this->setError("L'établissement $id existe déjà");
                 }
             }
         }
         if ($nom!="" && $this->estUnNomEtablissement($connexion, 'C', $id, $nom)) {
-            $this->setErreur("L'établissement $nom existe déjà");
+            $this->setError("L'établissement $nom existe déjà");
         }
         if ($codePostal!="" && !($this->estUnCp($codePostal))) {
-            $this->setErreur("Le code postal doit comporter 5 chiffres");   
+            $this->setError("Le code postal doit comporter 5 chiffres");   
         }
         if ($nombreChambresOffertes!="" && !($this->estEntier($nombreChambresOffertes))) {
-            $this->setErreur("La valeur de l'offre doit être un entier");
+            $this->setError("La valeur de l'offre doit être un entier");
         }
     }
       
@@ -322,29 +322,29 @@ class Erreurs extends Modele
     public $tabExceptions = array();
    
     // stocke l'exception $e attrapée par le catch dans un array
-    public function setErreur($e) 
+    public function setError($e) 
     {
-        $tabExceptions['erreurs'][]=$e;
+        $this->tabExceptions['errors'][]=$e;
     }
 
-    public function nbErreurs()
+    public function countErrors()
     {
-        if (!isset($tabExceptions['erreurs'])) {
+        if (!isset($this->tabExceptions['errors'])) {
             return 0;
         }
         else
         {
-            return count($tabExceptions['erreurs']);
+            return count($this->tabExceptions['errors']);
         }
     }
    
-    public function getErreurs()
+    public function fetchErrors()
     {
-        echo '<div class="msgErreur">';
+        echo '<div class="msgError">';
         echo '<ul>';
-        foreach($tabExceptions as $erreur)
+        foreach($this->tabExceptions as $error)
         {
-            echo "<li>$erreur->getMessage()</li>";
+            echo "<li>$error->getMessage()</li>";
         }
         echo '</ul>';
         echo '</div>';

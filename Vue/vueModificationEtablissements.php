@@ -1,5 +1,5 @@
 <?php $title = 'Accueil > Modifier Etablissement'; ?> 
-<?php ob_start() ?>
+<?php ob_start(); ?>
 <?php
 
 // Déclaration du tableau des civilités
@@ -49,7 +49,7 @@ if ($modif == 'demanderModifEtab') {
         $nomResponsable,
         $nombreChambresOffertes
     );
-    if ($modele->nbErreurs() == 0) {
+    if ($modele->countErrors() == 0) {
         $modele->modifierEtablissement(
             $connexion,
             $id,
@@ -177,8 +177,8 @@ for ($i = 0; $i < 3; $i = $i + 1) {
 // En cas de validation du formulaire : affichage des erreurs ou du message de
 // confirmation
 if ($modif == 'validerModifEtab') {
-    if ($modele->nbErreurs() != 0) {
-        $modele->getErreurs();
+    if ($modele->countErrors() != 0) {
+        $modele->getErrors();
     } else {
         echo "
       <h5><center>La modification de l'établissement a été effectuée</center></h5>";
