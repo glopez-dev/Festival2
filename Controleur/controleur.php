@@ -15,13 +15,13 @@ class Controleur
         include 'Vue/vueListeEtablissements.php';
     }
 
-    public function creationEtablissement($connexion, $modele)
+    public function creationEtablissement($connexion, $modele, $errors)
     {
         $modif=$_REQUEST['modif'];
         include 'Vue/vueCreationEtablissement.php';
     }
 
-    public function modificationEtablissements($connexion, $modele)
+    public function modificationEtablissements($connexion, $modele, $errors)
     {
         $modif=$_REQUEST['modif'];
         include 'Vue/vueModificationEtablissements.php';
@@ -54,7 +54,7 @@ class Controleur
 
     // PUIS ON DEFINIT LE CONTROLEUR FRONTAL
 
-    public function displayVue($connexion, $modele)
+    public function displayVue($connexion, $modele, $errors)
     {
     
         if (isset($_GET['action'])) {
@@ -66,10 +66,10 @@ class Controleur
                 $this->consultationAttributions($connexion, $modele);
                 break;
             case 'creationEtablissement' :
-                $this->creationEtablissement($connexion, $modele);
+                $this->creationEtablissement($connexion, $modele, $errors);
                 break;
             case 'modificationEtablissements' :
-                $this->modificationEtablissements($connexion, $modele);
+                $this->modificationEtablissements($connexion, $modele, $errors);
                 break;
             case 'supressionEtablissements' :
                 $this->supressionEtablissement($connexion, $modele);

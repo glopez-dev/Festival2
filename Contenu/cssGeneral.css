@@ -152,7 +152,7 @@ COULEUR DU TEXTE : ROSE) */
 
 .msgError
 {
-   background-color:#FFDD88;
+   /*background-color:#FFDD88;*/
    color:#FF00CC;
    font-size:14px;
 }

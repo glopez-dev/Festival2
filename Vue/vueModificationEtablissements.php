@@ -38,7 +38,7 @@ if ($modif == 'demanderModifEtab') {
     $prenomResponsable = $_REQUEST['prenomResponsable'];
     $nombreChambresOffertes = $_REQUEST['nombreChambresOffertes'];
 
-    $modele->verifierDonneesEtabM(
+    $errors->verifierDonneesEtabM(
         $connexion,
         $id,
         $nom,
@@ -49,7 +49,7 @@ if ($modif == 'demanderModifEtab') {
         $nomResponsable,
         $nombreChambresOffertes
     );
-    if ($modele->countErrors() == 0) {
+    if ($errors->countErrors() == 0) {
         $modele->modifierEtablissement(
             $connexion,
             $id,
@@ -177,8 +177,8 @@ for ($i = 0; $i < 3; $i = $i + 1) {
 // En cas de validation du formulaire : affichage des erreurs ou du message de
 // confirmation
 if ($modif == 'validerModifEtab') {
-    if ($modele->countErrors() != 0) {
-        $modele->getErrors();
+    if ($errors->countErrors() != 0) {
+        $errors->getErrors();
     } else {
         echo "
       <h5><center>La modification de l'établissement a été effectuée</center></h5>";

@@ -319,12 +319,12 @@ class Errors extends Modele
       
     // FONCTIONS DE GESTION DES ERREURS
 
-    public $tabExceptions = array();
+    public static $tabExceptions = array();
    
     // stocke l'exception $e attrapée par le catch dans un array
     public function setError($e) 
     {
-        $this->tabExceptions['errors'][]=$e;
+        $this->tabExceptions['errors']=$e;
     }
 
     public function countErrors()
@@ -344,7 +344,7 @@ class Errors extends Modele
         echo '<ul>';
         foreach($this->tabExceptions as $error)
         {
-            echo "<li>$error->getMessage()</li>";
+            echo "<li>".$error->getMessage()."</li>";
         }
         echo '</ul>';
         echo '</div>';
